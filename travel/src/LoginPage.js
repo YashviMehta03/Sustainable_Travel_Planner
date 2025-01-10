@@ -9,7 +9,7 @@ const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     if (isLogin) {
       console.log("Logging in:", { username, password });
     } else {
@@ -26,12 +26,8 @@ const LoginPage = () => {
       <div className="flex w-full bg-black bg-opacity-40">
         {/* Left Side for Quote */}
         <div className="w-1/2 flex items-center justify-center">
-          {/* <h1 className="font-dancing text-white text-5xl md:text-7xl font-bold italic text-center p-10">
+          <h1 className="font-dancing text-white text-5xl md:text-7xl font-bold italic text-center p-10">
             "Travel not to find yourself, but to remember who you've been all
-            along...."
-          </h1> */}
-          <h1 className="text-white text-5xl md:text-5.5xl font-bold italic text-center p-10">
-            "Travel not to find youself, but to remember who you've been all
             along...."
           </h1>
         </div>
@@ -85,7 +81,7 @@ const LoginPage = () => {
                 />
               </div>
               <button
-                type="submit"
+                //type="submit"
                 className="w-full bg-blue-500 text-white text-xl py-3 rounded-md hover:bg-blue-600 transition duration-200"
               >
                 {isLogin ? "Login" : "Sign Up"}
