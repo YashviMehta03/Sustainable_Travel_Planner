@@ -10,7 +10,8 @@
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.1",
     "react-scripts": "5.0.1",
-    "react-select": "^5.9.0"
+    "react-select": "^5.9.0",
+    "react-typewriter-effect": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

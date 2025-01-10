@@ -7,6 +7,7 @@ import About from "./about";
 import Contact from "./contact";
 import Iternary from "./iternary";
 import Input from "./input";
+import Itineraries from "./itineraries";
 var ReactDOM = require("react-dom");
 //import ReactDOM from "react-dom";
 const App = () => {
@@ -17,8 +18,9 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/itineraries" element={<Iternary />} />
+        <Route path="/newitinerary" element={<Iternary />} />
         <Route path="/input" element={<Input />} />
+        <Route path="/itineraries" element={<Itineraries />} />
       </Routes>
     </Router>
   );

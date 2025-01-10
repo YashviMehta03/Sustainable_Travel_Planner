@@ -39,28 +39,9 @@ const Input = () => {
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block mb-1 font-semibold">Destination:</label>
-          <Autocomplete
-            getItemValue={(item) => item}
-            items={destinations.filter((item) =>
-              item.toLowerCase().includes(destination.toLowerCase())
-            )}
-            renderItem={(item, isHighlighted) => (
-              <div
-                key={item}
-                className={`p-2 ${
-                  isHighlighted ? "bg-blue-500 text-white" : "bg-white"
-                }`}
-              >
-                {item}
-              </div>
-            )}
-            value={destination}
-            onChange={(e) => setDestination(e.target.value)}
-            onSelect={(val) => setDestination(val)}
-            inputProps={{
-              className: "border border-gray-300 rounded p-2 w-full",
-              placeholder: "Type a destination",
-            }}
+          <input
+            type="text"
+            className="border border-gray-300 rounded p-2 w-full"
           />
         </div>
 
@@ -96,7 +77,7 @@ const Input = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1 font-semibold">Budget:</label>
+          <label className="block mb-1 font-semibold">Budget (INR):</label>
           <input
             type="text"
             value={budget}

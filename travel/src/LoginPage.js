@@ -104,11 +104,11 @@ const LoginPage = () => {
       </div>
 
       {/* Welcome Heading */}
-      <div className="absolute top-10 left-10">
+      {/*<div className="absolute top-10 left-10">
         <h1 className="text-white text-5xl font-bold">
           Sustainable Travel Planner
         </h1>
-      </div>
+      </div>*/}
     </div>
   );
 };
