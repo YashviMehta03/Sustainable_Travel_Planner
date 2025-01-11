@@ -12,12 +12,6 @@ const AboutUs = () => {
           </div>
           <nav className="space-x-6">
             <a
-              href="/solutions"
-              className="text-gray-700 hover:text-green-500 text-lg"
-            >
-              Solutions
-            </a>
-            <a
               href="/about"
               className="text-gray-700 hover:text-green-500 text-lg"
             >

@@ -127,18 +127,22 @@ const Home = () => {
 
         <div className="flex justify-center space-x-4 px-8 overflow-x-scroll scrollbar-hide">
           {nicheDestinations.map((dest, index) => (
-            <div
-              key={index}
-              className="flex-shrink-0 w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg text-center"
-            >
-              {/* Circular Image for each niche destination */}
-              <img
-                src={dest.image} // Using the imported images
-                alt={dest.name}
-                className="w-full h-full object-cover"
-              />
-              {/* Destination Name */}
-              <p className="text-black mt-2 text-xs">{dest.name}</p>
+            <div>
+              <div
+                key={index}
+                className="flex-shrink-0 w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg text-center"
+              >
+                {/* Circular Image for each niche destination */}
+                <img
+                  src={dest.image} // Using the imported images
+                  alt={dest.name}
+                  className="w-full h-full object-cover"
+                />
+                {/* Destination Name */}
+              </div>
+              <p className="text-black mt-2 text-xl text-center py-2">
+                {dest.name}
+              </p>
             </div>
           ))}
         </div>
