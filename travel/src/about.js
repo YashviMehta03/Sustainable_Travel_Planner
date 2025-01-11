@@ -1,27 +1,66 @@
-// AboutUs.js
 import React from "react";
+import teamImage from "./world.jpg"; // Replace with your image path
 
 const AboutUs = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center">About Us</h2>
-        <p className="text-gray-700 mb-4">
-          Welcome to Sustainable Travel Planner! We are dedicated to helping you
-          find eco-friendly travel options that allow you to explore the world
-          while minimizing your carbon footprint. Our mission is to promote
-          sustainable tourism practices and provide travelers with the resources
-          they need to make informed decisions.
-        </p>
-        <p className="text-gray-700 mb-4">
-          Join us in our commitment to preserving the environment and supporting
-          local communities. Whether you're planning a weekend getaway or an
-          extended adventure, we’re here to assist you in creating memorable and
-          responsible travel experiences.
-        </p>
-        <p className="text-gray-700 mb-4">
-          Thank you for choosing us as your travel partner!
-        </p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="relative w-full max-w-6xl bg-white rounded-lg shadow-lg p-8">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-10">
+          <div className="text-3xl font-bold text-green-500">
+            TravelPlanners
+          </div>
+          <nav className="space-x-6">
+            <a
+              href="/solutions"
+              className="text-gray-700 hover:text-green-500 text-lg"
+            >
+              Solutions
+            </a>
+            <a
+              href="/about"
+              className="text-gray-700 hover:text-green-500 text-lg"
+            >
+              About Us
+            </a>
+            <a
+              href="/contact"
+              className="text-gray-700 hover:text-green-500 text-lg"
+            >
+              Contact
+            </a>
+          </nav>
+        </header>
+
+        {/* Main Content */}
+        <div className="flex flex-wrap items-center">
+          {/* Text Section */}
+          <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+            <h1 className="text-6xl font-extrabold text-black leading-tight">
+              About <br /> Us
+            </h1>
+            <p className="text-lg text-black mt-6 max-w-lg">
+              Hello. We’re TravelPlanners. A sustainable travel planning website
+              that has got you covered, whereevr you want to go. With
+              TravelPlanners, you can plan your dream trip within just a few
+              clicks.
+            </p>
+          </div>
+
+          {/* Image Section */}
+          <div className="w-full lg:w-1/2 flex justify-center">
+            <img
+              src={teamImage} // Replace with your image source
+              alt="Team"
+              className="rounded-lg shadow-lg w-full  h-auto"
+            />
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="bg-gray-200 p-4 text-center mt-10 rounded-lg">
+          <p className="text-gray-600">© 2023 found.r. All rights reserved.</p>
+        </footer>
       </div>
     </div>
   );
