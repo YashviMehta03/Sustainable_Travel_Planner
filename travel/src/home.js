@@ -7,6 +7,16 @@ import thailandImg from "./thailand.webp"; // Import Thailand image
 import singaporeImg from "./singapore.avif"; // Import Singapore image
 import baliImg from "./bali.jpg"; // Import Bali image
 
+import bhutanImg from "./assets/bhutan.jpg"; // Import Bhutan image
+import georgiaImg from "./assets/georgia.jpg"; // Import Georgia image
+import laoImg from "./assets/lao.jpg"; // Import Lao PDR image
+import mongoliaImg from "./assets/mongolia.jpg"; // Import Mongolia image
+import eswatiniImg from "./assets/eswatini.jpg"; // Import Eswatini image
+import icelandImg from "./assets/iceland.jpg"; // Import Iceland image
+import madagascarImg from "./assets/madagascar.jpg"; // Import Madagascar image
+import kyrgyzstanImg from "./assets/kyrgyzstan.jpg"; // Import Kyrgyzstan image
+import malawiImg from "./assets/malawi.jpg"; // Import Malawi image
+
 const Home = () => {
   const destinations = [
     { name: "Dubai", tagline: "THE CITY OF LIFE", image: dubaiImg },
@@ -14,6 +24,18 @@ const Home = () => {
     { name: "Thailand", tagline: "THE KINGDOM OF", image: thailandImg },
     { name: "Singapore", tagline: "THE LION CITY", image: singaporeImg },
     { name: "Bali", tagline: "CULTURAL PARADISE", image: baliImg },
+  ];
+
+  const nicheDestinations = [
+    { name: "Bhutan", image: bhutanImg },
+    { name: "Georgia", image: georgiaImg },
+    { name: "Lao PDR", image: laoImg },
+    { name: "Mongolia", image: mongoliaImg },
+    { name: "Eswatini", image: eswatiniImg },
+    { name: "Iceland", image: icelandImg },
+    { name: "Madagascar", image: madagascarImg },
+    { name: "Kyrgyzstan", image: kyrgyzstanImg },
+    { name: "Malawi", image: malawiImg },
   ];
 
   return (
@@ -92,6 +114,31 @@ const Home = () => {
                 </p>
                 <h3 className="text-lg font-semibold">{dest.name}</h3>
               </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Scrollable Niche Destinations Section with Circles */}
+      <section className="bg-gray-200 py-12">
+        <h2 className="text-4xl font-bold text-center mb-8">
+          Unique & Underrated Destinations
+        </h2>
+
+        <div className="flex justify-center space-x-4 px-8 overflow-x-scroll scrollbar-hide">
+          {nicheDestinations.map((dest, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg text-center"
+            >
+              {/* Circular Image for each niche destination */}
+              <img
+                src={dest.image} // Using the imported images
+                alt={dest.name}
+                className="w-full h-full object-cover"
+              />
+              {/* Destination Name */}
+              <p className="text-black mt-2 text-xs">{dest.name}</p>
             </div>
           ))}
         </div>
