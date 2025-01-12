@@ -8,6 +8,8 @@ import Contact from "./contact";
 import Iternary from "./iternary";
 import Input from "./input";
 import Itineraries from "./itineraries";
+import Carbonfp from "./carbonfp";
+
 var ReactDOM = require("react-dom");
 //import ReactDOM from "react-dom";
 const App = () => {
@@ -21,6 +23,7 @@ const App = () => {
         <Route path="/newitinerary" element={<Iternary />} />
         <Route path="/input" element={<Input />} />
         <Route path="/itineraries" element={<Itineraries />} />
+        <Route path="/carbonfp" element={<Carbonfp />} />
       </Routes>
     </Router>
   );

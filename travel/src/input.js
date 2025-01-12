@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Autocomplete from "react-autocomplete";
 import Select from "react-select";
 
 const Input = () => {
@@ -12,7 +12,7 @@ const Input = () => {
   const [budget, setBudget] = useState("");
   const [travelMode, setTravelMode] = useState(null);
 
-  const destinations = ["Paris", "London", "New York", "Tokyo", "Dubai"];
+  const navigate = useNavigate();
 
   const travelModes = [
     { value: "couple", label: "Couple" },
@@ -23,14 +23,27 @@ const Input = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
-      destination,
-      startDate,
-      endDate,
-      numberOfPeople,
-      budget,
-      travelMode,
-    });
+    if (
+      destination &&
+      startDate &&
+      endDate &&
+      numberOfPeople > 0 &&
+      budget &&
+      travelMode
+    ) {
+      console.log({
+        destination,
+        startDate,
+        endDate,
+        numberOfPeople,
+        budget,
+        travelMode,
+      });
+
+      navigate("/newitinerary");
+    } else {
+      alert("Please fill all the fields before submitting.");
+    }
   };
 
   return (
@@ -41,7 +54,10 @@ const Input = () => {
           <label className="block mb-1 font-semibold">Destination:</label>
           <input
             type="text"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
             className="border border-gray-300 rounded p-2 w-full"
+            placeholder="Enter your destination"
           />
         </div>
 

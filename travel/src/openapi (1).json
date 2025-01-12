@@ -1,0 +1,2038 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Airports API",
+    "description": "## Introduction\nThe Airports API, part of the [FlightStats APIs](/apis/flightstats-apis/overview), delivers important details about an airport including IATA/ICAO codes, location (lat/long), airport name, street address, elevation, UTC time zone offset and more. This data can be delivered as an XML or JSON response in English or Simplified Chinese.\n\nThe Airports API also lets you determine which airports are near a specified location (lat/long) within a specified radius. This is very useful for location-based applications (smart phones, tablets, and in-dash navigation systems.\n\nAirports API answer questions such as:\n* What are all the active airports in the world?\n* What are the details for the Airport with this code?\n\nIATA codes are 3 letter codes maintained by the International Air Transport Association and guaranteed to be unique. IATA can reuse airport codes when an old airport closes. \n\nICAO codes are 4 letter codes maintained by the International Civil Aviation Organization and guaranteed to be unique. The first character in the code corresponds to the country the airport resides in. Not every airport has an ICAO code.\n\nFlightStats code is the 2-3 letter codes assigned to the airline in FlightStats systems and are unique.\n\nNotes: IATA airport codes are also know as location identifier or station codes, and may include railway and bus stations in addition to just airports. \n\nWhen airports close or the code stops being used for whatever reason, FlightStats marks the airport record as inactive. Inactive airport information may still be valid in case like Historical Flight Status, so both active and inactive airports are returned. If you are only interested in active airports, then use the Active Airports API.\n\nReference data is typically downloaded and cached in customer systems. Cirium recommends our customers refresh their caches of reference data at least weekly.\n\n## Extended options\nBesides the normal [extended options](/apis/flightstats-apis/get-started), the Airport APIs support _excludeRailwayStations_. When set, the API removes all railway stations from the response.\n\n## Licensing\nThe Airport APIs are standard APIs and included in our Commercial and Contract plans. \n\nA breakdown of the available plans is available on [Get evaluation account](/apis/flightstats-apis/get-evaluation-account#)\n\n## Schemas\nClick the download button at the top of this document to download the OpenApi spec for this API. Other schemas:\n\nLong term support \n* SOAP (deprecated) - [WSDL](https://api.flightstats.com/flex/airports/docs/v1/lts/soap/airportsService.wsdl) [XSD](https://api.flightstats.com/flex/airports/docs/v1/lts/soap/airportsService.xsd)\n* REST - [WADL](https://api.flightstats.com/flex/airports/docs/v1/lts/rest/airportsService.wadl) [XSD](https://api.flightstats.com/flex/airports/docs/v1/lts/soap/airportsService.xsd)\n\nExtended fields\n* SOAP (deprecated) - [WSDL+XSD](https://api.flightstats.com/flex/airports/soap/v1/airportsService?wsdl)\n* REST - [WADL](https://api.flightstats.com/flex/airports/rest/v1/schema/wadl) [XSD](https://api.flightstats.com/flex/airports/rest/v1/schema/xsd) [JSON](https://api.flightstats.com/flex/airports/rest/v1/schema/json)\n\n## Similar APIs\n[Aeronautical (Laminar Data Hub)](/apis/laminar-data-hub/aeronautical-v2) - Aerodrome (airport) reference data for Laminar Data Hub\n\n[Airlines](/apis/flightstats-apis/airlines) - Reference data for Airlines\n\n[Equipment](/apis/flightstats-apis/equipment) - Reference data for Equipement\n    \n",
+    "termsOfService": "http://www.flightstats.com/company/legal/terms-of-use/",
+    "contact": {
+      "name": "Cirium Help Desk",
+      "url": "https://helpdesk.cirium.com/"
+    },
+    "version": "691"
+  },
+  "servers": [
+    {
+      "url": "https://api.flightstats.com/",
+      "description": "Cirium Flex API Endpoint"
+    }
+  ],
+  "security": [
+    {
+      "appIdQueryParam": [],
+      "appKeyQueryParam": []
+    },
+    {
+      "appIdHeader": [],
+      "appKeyHeader": []
+    }
+  ],
+  "paths": {
+    "/flex/airports/rest/v1/{format}/active": {
+      "get": {
+        "summary": "Active airports",
+        "description": "Returns a listing of currently active airports\n",
+        "operationId": "active",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all active airports.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.json"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.xml"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.xml"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/all": {
+      "get": {
+        "summary": "All airports",
+        "description": "Returns a listing of all airports, including those that are not currently active\n",
+        "operationId": "all",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all airports.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.json"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.xml"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.xml"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/{code}/today": {
+      "get": {
+        "summary": "Current by code",
+        "description": "Returns the airport that currently has the given code (or null if none). Code type chosen via precedence order.\n",
+        "operationId": "anyCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PDX"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single matching airport that is active today.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.json"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a single airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.xml"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a single airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.xml"
+                  }
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/cityCode/{code}": {
+      "get": {
+        "summary": "By city code",
+        "description": "Returns a listing of airports that have had the given city code\n",
+        "operationId": "cityCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "City code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PDX"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of airports within the requested city code.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.json"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.xml"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.xml"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/countryCode/{code}": {
+      "get": {
+        "summary": "By country code",
+        "description": "Returns a listing of airports that have had the given country code\n",
+        "operationId": "countryCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Country code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "US"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "languageCode:xx",
+                  "excludeRailwayStations"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of airport within the requested country.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.json"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.xml"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.xml"
+                  }
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/fs/{code}": {
+      "get": {
+        "summary": "By FlightStats code",
+        "description": "Returns the airport with the given FlightStats code, a globally unique code across time\n",
+        "operationId": "fsCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "FlightStats code, globally unique across time",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PDX"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single matching airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.json"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a single airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.xml"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a sinlge airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.xml"
+                  }
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/iata/{code}": {
+      "get": {
+        "summary": "By IATA code",
+        "description": "Returns the airport with the given IATA code\n",
+        "operationId": "iataCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "IATA code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PDX"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single matching airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.json"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a single airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.xml"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a sinlge airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.xml"
+                  }
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/icao/{code}": {
+      "get": {
+        "summary": "By ICAO code",
+        "description": "Returns the airport with the given ICAO code\n",
+        "operationId": "icaoCode",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "ICAO code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "KPDX"
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single matching airport",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.json"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a single airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Single Airport (defaults)": {
+                    "description": "Airports response with a single airport",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response.xml"
+                  },
+                  "Single Airport (languageCode:zh)": {
+                    "description": "Airports response with a sinlge airport, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airport_response_languageCode_zh.xml"
+                  }
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flex/airports/rest/v1/{format}/withinRadius/{longitude}/{latitude}/{radiusMiles}": {
+      "get": {
+        "summary": "Within radius of location",
+        "description": "Returns a listing of airports located within a specified radius of the given position\n",
+        "operationId": "withinRadius",
+        "parameters": [
+          {
+            "name": "format",
+            "in": "path",
+            "description": "The data format returned in the response",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "json",
+              "enum": [
+                "json",
+                "jsonp",
+                "xml"
+              ]
+            }
+          },
+          {
+            "name": "longitude",
+            "in": "path",
+            "description": "longitude",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "-122.592901"
+            }
+          },
+          {
+            "name": "latitude",
+            "in": "path",
+            "description": "latitude",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "45.588995"
+            }
+          },
+          {
+            "name": "radiusMiles",
+            "in": "path",
+            "description": "radiusMiles",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "10"
+            }
+          },
+          {
+            "name": "extendedOptions",
+            "in": "query",
+            "description": "[Extended options](/apis/flightstats-apis/get-started) for modifying standard API behavior to fit special use cases",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "useHttpErrors",
+                  "includeNewFields",
+                  "excludeRailwayStations",
+                  "languageCode:en",
+                  "languageCode:ar",
+                  "languageCode:de",
+                  "languageCode:es",
+                  "languageCode:fr",
+                  "languageCode:ja",
+                  "languageCode:ko",
+                  "languageCode:pt",
+                  "languageCode:zh"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of airports within the requested area.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.json"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.json"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                },
+                "examples": {
+                  "Multiple Airports (defaults)": {
+                    "description": "Airports response with multiple airports",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response.xml"
+                  },
+                  "Multiple Airports (languageCode:zh)": {
+                    "description": "Airports response with multiple airports, with extendedOptions=languageCode:zh",
+                    "externalValue": "https://developer.cirium.com/link-proxy?https://api.flightstats.com/flex/airports/docs/v1/samples/Airports_response_languageCode_zh.xml"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client request error. Consult error response for specifics.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authorization failure. Invalid 'appId', 'appKey', or rate limit violation.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Requested item could not be found, or the endpoint does not exist.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "API application error. If error is consistent, please contact Cirium Support.",
+            "content": {
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "application/javascript; charset=UTF-8": {
+                "schema": {
+                  "$ref": "#/components/schemas/AirportsResponse"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponseError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Airport": {
+        "type": "object",
+        "description": "The airport object contains the unique codes and name that identify a unique airport",
+        "properties": {
+          "fs": {
+            "type": "string",
+            "example": "PDX",
+            "description": "The Cirium code for the airport, globally unique across time"
+          },
+          "iata": {
+            "type": "string",
+            "example": "PDX",
+            "description": "The IATA code for the airport"
+          },
+          "icao": {
+            "type": "string",
+            "example": "KPDX",
+            "description": "The ICAO code for the airport"
+          },
+          "faa": {
+            "type": "string",
+            "example": "PDX",
+            "description": "The FAA code for the airport"
+          },
+          "name": {
+            "type": "string",
+            "example": "Portland International Airport",
+            "description": "The name of the airport"
+          },
+          "street1": {
+            "type": "string",
+            "example": "7000 NE Airport Way",
+            "description": "The street address of the airport, part 1"
+          },
+          "street2": {
+            "type": "string",
+            "description": "The street address of the airport, part 2"
+          },
+          "city": {
+            "type": "string",
+            "example": "Portland",
+            "description": "The city in which the airport resides"
+          },
+          "cityCode": {
+            "type": "string",
+            "example": "PDX",
+            "description": "The code of the city in which the airport resides"
+          },
+          "stateCode": {
+            "type": "string",
+            "example": "OR",
+            "description": "The State in which the airport resides"
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "97218",
+            "description": "The postal code in which the airport resides"
+          },
+          "countryCode": {
+            "type": "string",
+            "example": "US",
+            "description": "The code for the country in which the airport resides"
+          },
+          "district": {
+            "type": "string",
+            "description": "The district of the city in which the airport resides. Returned if specifying includeNewFields in extendedOptions."
+          },
+          "countryName": {
+            "type": "string",
+            "example": "United States",
+            "description": "The name of the country in which the Airport resides"
+          },
+          "regionName": {
+            "type": "string",
+            "example": "North America",
+            "description": "The name of the region in which the Airport resides"
+          },
+          "timeZoneRegionName": {
+            "type": "string",
+            "example": "America/Los_Angeles",
+            "description": "The name of the Time Zone region in which the Airport resides"
+          },
+          "weatherZone": {
+            "type": "string",
+            "example": "ORZ006",
+            "description": "The NOAA weather zone (US only) in which the Airport resides"
+          },
+          "localTime": {
+            "type": "string",
+            "example": "2020-01-01T00:00:00.000",
+            "description": "The local time at the Airport in ISO-8601 format. yyyy-MM-dd'T'HH:mm:ss.SSS."
+          },
+          "utcOffsetHours": {
+            "type": "number",
+            "format": "float",
+            "example": -8,
+            "description": "The current UTC offset at the Airport"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "float",
+            "example": 45.588995,
+            "description": "The latitude of the airport in decimal degrees"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "float",
+            "example": -122.592901,
+            "description": "The longitude of the airport in decimal degrees"
+          },
+          "elevationFeet": {
+            "type": "integer",
+            "format": "int32",
+            "example": 30,
+            "description": "The elevation above sea level of the airport in feet"
+          },
+          "classification": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1,
+            "description": "The Cirium classification of the size of the airport, 1(max) to 5(min)"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Boolean value indicating if the airport is currently operational"
+          },
+          "dateFrom": {
+            "type": "string",
+            "description": "Ignore. These are not returned."
+          },
+          "dateTo": {
+            "type": "string",
+            "description": "Ignore. These are not returned."
+          },
+          "weatherUrl": {
+            "type": "string",
+            "example": "https://api.flightstats.com/flex/weather/rest/v1/json/all/PDX?codeType=fs",
+            "description": "URL for the Weather service with current weather data for the Airport"
+          },
+          "delayIndexUrl": {
+            "type": "string",
+            "example": "https://api.flightstats.com/flex/delayindex/rest/v1/json/airports/PDX?codeType=fs",
+            "description": "URL for the DelayIndex service with current delay information computed for the Airport"
+          }
+        }
+      },
+      "AirportsResponse": {
+        "description": "The response body includes the following:\n- InterpretedRequest - The API returns the information you requested, plus any interpretation of your request (for example, it will show you the FlightStats code for an airport that it is using and that may be different than the IATA or ICAO code provided)\n- APIResponseError - If there is an error, the response includes this error object describing the problem\n- airport - If the result is a single airport, the API returns the airport in this element\n- airports - If the result includes more than one airport, the API returns an array of Airport elements\n",
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ApiResponseError"
+          },
+          "airports": {
+            "type": "array",
+            "xml": {
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/components/schemas/Airport"
+            }
+          },
+          "airport": {
+            "$ref": "#/components/schemas/Airport"
+          }
+        },
+        "xml": {
+          "name": "response"
+        }
+      },
+      "ApiResponseError": {
+        "type": "object",
+        "description": "In the default case, when an error occurs the API returns a 200 status code and this structure contains information about the error. Not returned if specifying _extendedOptions=useHTTPErrors_, in which case the API returns the HTTP error code and _text/plain_ body containing the same information as in the structure.",
+        "properties": {
+          "httpStatusCode": {
+            "type": "integer",
+            "format": "int32",
+            "example": 400,
+            "description": "This is the standard HTTP code (400, 401, 404, etc...)"
+          },
+          "errorId": {
+            "type": "string",
+            "example": "4d1c06b9-f999-4fd6-81fd-9a7d1cd5768f",
+            "description": "This is a unique identifier for the error used internally at Cirium. Include this string in helpdesk requests to help us troubleshoot issues."
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "This contains detail about the error. If there are multiple errors in the request, the string may have multiple items separated by a '|' character.",
+            "example": "Invalid value for carrier: AAAA|Invalid value for date: 1969-02-02 - The date specified is not within the expected range. Earliest allowed date '2021-08-23'"
+          },
+          "errorCode": {
+            "type": "string",
+            "example": "BAD_REQUEST"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "appIdQueryParam": {
+        "type": "apiKey",
+        "description": "ID of the application making the request",
+        "name": "appId",
+        "in": "query"
+      },
+      "appKeyQueryParam": {
+        "type": "apiKey",
+        "description": "Authentication key of the application making the request",
+        "name": "appKey",
+        "in": "query"
+      },
+      "appIdHeader": {
+        "type": "apiKey",
+        "description": "ID of the application making the request",
+        "name": "appId",
+        "in": "header"
+      },
+      "appKeyHeader": {
+        "type": "apiKey",
+        "description": "Authentication key of the application making the request",
+        "name": "appKey",
+        "in": "header"
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import backimg from "./travel_login.jpg";
+import backimg from "./assets/travel_login.jpg";
+import { Link } from "react-router-dom";
 
 const Iternary = () => {
   // State for flight search
@@ -35,7 +36,16 @@ const Iternary = () => {
             alt="back"
             className="rounded-lg shadow-md mb-4 h-80 w-full object-cover"
           />
-          <p className="text-3xl font-bold mt-4">New York</p>
+
+          <div className="flex items-center justify-between mt-4">
+            <p className="text-3xl font-bold">New York</p>
+            <Link to="/carbonfp" >
+            <button className="bg-green-500 text-white text-xl px-6 py-3 rounded hover:bg-green-600">
+              Calculate carbon footprint
+              </button>
+              </Link>
+            
+          </div>
         </div>
 
         {/* Flight Search Box */}

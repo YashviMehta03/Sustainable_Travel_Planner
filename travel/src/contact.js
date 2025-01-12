@@ -4,7 +4,7 @@ import React from "react";
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Message sent!"); // Placeholder for form submission logic
+    alert("Message sent!");
   };
 
   return (
@@ -20,7 +20,7 @@ const Contact = () => {
         onSubmit={handleSubmit}
         className="relative bg-white p-8 rounded-lg shadow-lg w-full max-w-md transform transition-all duration-300 hover:scale-105 z-10"
       >
-        <h2 className="text-3xl font-extrabold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-500">
+        <h2 className="text-3xl font-extrabold mb-6 text-center text-black">
           Contact Us
         </h2>
 

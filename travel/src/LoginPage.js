@@ -1,15 +1,23 @@
 // src/LoginPage.js
-import React, { useState } from "react";
-import backgroundImage from "./travel_login.jpg"; // Ensure this path is correct
+import React, { useState ,useEffect} from "react";
+import { useLocation } from "react-router-dom";
+import backgroundImage from "./assets/travel_login.jpg"; // Ensure this path is correct
 
 const LoginPage = () => {
+  const location = useLocation();
   const [username, setUsername] = useState("");
+  const queryParams = new URLSearchParams(location.search);
+  const mode = queryParams.get("mode") || "login"; // Default to "login"e("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogin, setIsLogin] = useState(true);
 
+   useEffect(() => {
+     setIsLogin(mode === "login");
+   }, [mode]);
+
   const handleSubmit = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     if (isLogin) {
       console.log("Logging in:", { username, password });
     } else {
@@ -26,7 +34,7 @@ const LoginPage = () => {
       <div className="flex w-full bg-black bg-opacity-40">
         {/* Left Side for Quote */}
         <div className="w-1/2 flex items-center justify-center">
-          <h1 className="font-dancing text-white text-5xl md:text-7xl font-bold italic text-center p-10">
+          <h1 className="font-dancing text-white md:text-6xl text-center p-10">
             "Travel not to find yourself, but to remember who you've been all
             along...."
           </h1>

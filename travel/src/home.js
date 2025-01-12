@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import backimg from "./home_img.jpg"; // Imported background image
-import dubaiImg from "./dubai.webp"; // Import Dubai image
-import europeImg from "./europe.jpg"; // Import Europe image
-import thailandImg from "./thailand.webp"; // Import Thailand image
-import singaporeImg from "./singapore.avif"; // Import Singapore image
-import baliImg from "./bali.jpg"; // Import Bali image
-
+import backimg from "./assets/home_img.jpg"; // Imported background image
+import dubaiImg from "./assets//dubai.webp"; // Import Dubai image
+import europeImg from "./assets/europe.jpg"; // Import Europe image
+import thailandImg from "./assets/thailand.webp"; // Import Thailand image
+import singaporeImg from "./assets/singapore.avif"; // Import Singapore image
+import baliImg from "./assets/bali.jpg"; // Import Bali image
 import bhutanImg from "./assets/bhutan.jpg"; // Import Bhutan image
 import georgiaImg from "./assets/georgia.jpg"; // Import Georgia image
 import laoImg from "./assets/lao.jpg"; // Import Lao PDR image
@@ -56,12 +55,12 @@ const Home = () => {
             <Link to="/contact" className="text-white hover:underline">
               Contact Us
             </Link>
-            <Link to="/login">
+            <Link to="/login?mode=login" state={{ mode: "login" }}>
               <button className="bg-gray-800 text-white py-1 px-4 rounded hover:bg-gray-700">
                 Login
               </button>
             </Link>
-            <Link to="/signup">
+            <Link to="/login?mode=signup" state={{ mode: "signup" }}>
               <button className="bg-gray-800 text-white py-1 px-4 rounded hover:bg-gray-700">
                 Signup
               </button>

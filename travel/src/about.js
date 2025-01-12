@@ -1,6 +1,5 @@
 import React from "react";
-import teamImage from "./world.jpg"; // Replace with your image path
-
+import teamImage from "./assets/world.jpg";
 const AboutUs = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
@@ -10,27 +9,14 @@ const AboutUs = () => {
           <div className="text-3xl font-bold text-green-500">
             TravelPlanners
           </div>
-          <nav className="space-x-6">
-            <a
-              href="/about"
-              className="text-gray-700 hover:text-green-500 text-lg"
-            >
-              About Us
-            </a>
-            <a
-              href="/contact"
-              className="text-gray-700 hover:text-green-500 text-lg"
-            >
-              Contact
-            </a>
-          </nav>
+          
         </header>
 
         {/* Main Content */}
         <div className="flex flex-wrap items-center">
           {/* Text Section */}
           <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
-            <h1 className="text-6xl font-extrabold text-black leading-tight">
+            <h1 className="text-5xl font-extrabold text-black leading-tight">
               About <br /> Us
             </h1>
             <p className="text-lg text-black mt-6 max-w-lg">
@@ -44,7 +30,7 @@ const AboutUs = () => {
           {/* Image Section */}
           <div className="w-full lg:w-1/2 flex justify-center">
             <img
-              src={teamImage} // Replace with your image source
+              src={teamImage}
               alt="Team"
               className="rounded-lg shadow-lg w-full  h-auto"
             />
@@ -53,7 +39,7 @@ const AboutUs = () => {
 
         {/* Footer */}
         <footer className="bg-gray-200 p-4 text-center mt-10 rounded-lg">
-          <p className="text-gray-600">© 2023 found.r. All rights reserved.</p>
+          <p className="text-gray-600">©travelplanners</p>
         </footer>
       </div>
     </div>
