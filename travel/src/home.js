@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import backimg from "./assets/home_img.jpg"; // Imported background image
 import dubaiImg from "./assets//dubai.webp"; // Import Dubai image
 import europeImg from "./assets/europe.jpg"; // Import Europe image
@@ -17,6 +18,8 @@ import kyrgyzstanImg from "./assets/kyrgyzstan.jpg"; // Import Kyrgyzstan image
 import malawiImg from "./assets/malawi.jpg"; // Import Malawi image
 
 const Home = () => {
+  const plannedItinerariesRef = useRef(null);
+
   const destinations = [
     { name: "Dubai", tagline: "THE CITY OF LIFE", image: dubaiImg },
     { name: "Europe", tagline: "OLD WORLD CHARM", image: europeImg },
@@ -24,6 +27,10 @@ const Home = () => {
     { name: "Singapore", tagline: "THE LION CITY", image: singaporeImg },
     { name: "Bali", tagline: "CULTURAL PARADISE", image: baliImg },
   ];
+
+  const scrollToItineraries = () => {
+    plannedItinerariesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const nicheDestinations = [
     { name: "Bhutan", image: bhutanImg },
@@ -43,7 +50,10 @@ const Home = () => {
       <div
         className="h-screen flex flex-col items-center justify-center bg-cover bg-center"
         style={{
-          backgroundImage: `url(${backimg})`, // Background image
+          backgroundImage: `url(${backimg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center top",
+          height: "80vh",
         }}
       >
         {/* Navbar */}
@@ -76,12 +86,13 @@ const Home = () => {
         </p>
 
         <div className="flex space-x-8 mt-6">
-          <Link to="/itineraries">
-            <button className="bg-white bg-opacity-30 border-2 border-white text-white py-3 px-8 rounded hover:bg-opacity-50 transition">
-              See Planned Itineraries
-            </button>
-          </Link>
-          <Link to="/input">
+          <button
+            onClick={scrollToItineraries}
+            className="bg-white bg-opacity-30 border-2 border-white text-white py-3 px-8 rounded hover:bg-opacity-50 transition"
+          >
+            See Planned Itineraries
+          </button>
+          <Link to="/login">
             <button className="bg-white bg-opacity-30 border-2 border-white text-white py-3 px-8 rounded hover:bg-opacity-50 transition">
               Start Planning Your Trip
             </button>
@@ -101,9 +112,8 @@ const Home = () => {
               key={index}
               className="flex-shrink-0 w-72 rounded-lg shadow-lg overflow-hidden"
             >
-              {/* Image for each destination */}
               <img
-                src={dest.image} // Using the imported images
+                src={dest.image}
                 alt={dest.name}
                 className="h-48 w-full object-cover"
               />
@@ -116,9 +126,18 @@ const Home = () => {
             </div>
           ))}
         </div>
+
+        {/* Add the Carbon Footprint Button */}
+        <div className="text-center mt-8">
+          <Link to="/carbonfp">
+            <button className="bg-green-600 text-white py-3 px-8 rounded hover:bg-green-700 transition">
+              Calculate Carbon Footprint Now!
+            </button>
+          </Link>
+        </div>
       </section>
 
-      {/* Scrollable Niche Destinations Section with Circles */}
+      {/* Scrollable Niche Destinations Section */}
       <section className="bg-gray-200 py-12">
         <h2 className="text-4xl font-bold text-center mb-8">
           Unique & Underrated Destinations
@@ -131,17 +150,43 @@ const Home = () => {
                 key={index}
                 className="flex-shrink-0 w-28 h-28 rounded-full overflow-hidden border-4 border-white shadow-lg text-center"
               >
-                {/* Circular Image for each niche destination */}
                 <img
-                  src={dest.image} // Using the imported images
+                  src={dest.image}
                   alt={dest.name}
                   className="w-full h-full object-cover"
                 />
-                {/* Destination Name */}
               </div>
               <p className="text-black mt-2 text-xl text-center py-2">
                 {dest.name}
               </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Scrollable Popular Destinations Section */}
+      <section ref={plannedItinerariesRef} className="bg-gray-100 py-12">
+        <h2 className="text-4xl font-bold text-center mb-8">
+          Planned itineraries
+        </h2>
+
+        <div className="flex overflow-x-scroll space-x-4 px-8 scrollbar-hide">
+          {destinations.map((dest, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-72 rounded-lg shadow-lg overflow-hidden"
+            >
+              <img
+                src={dest.image}
+                alt={dest.name}
+                className="h-48 w-full object-cover"
+              />
+              <div className="bg-white p-4 text-center">
+                <p className="text-gray-600 uppercase text-xs tracking-wide mb-1">
+                  {dest.tagline}
+                </p>
+                <h3 className="text-lg font-semibold">{dest.name}</h3>
+              </div>
             </div>
           ))}
         </div>
