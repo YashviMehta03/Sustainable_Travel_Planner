@@ -1,0 +1,37 @@
+[
+  {
+    "averageRating": -1,
+    "image": "N/A",
+    "menuUrl": "N/A",
+    "name": "Brasserie Paris Marriott Rive Gauche",
+    "userReviewCount": "N/A"
+  },
+  {
+    "averageRating": 5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/55/7e/b3/la-poesia-a-tavola.jpg?w=1000&h=600&s=1",
+    "menuUrl": "https://m.appero.co/#a2338a8f-d72b-407c-8dce-164289c07b20",
+    "name": "Pizzeria Arrivederci",
+    "userReviewCount": 4142
+  },
+  {
+    "averageRating": 5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/25/08/0a/le-cheddar.jpg?w=1000&h=500&s=1",
+    "menuUrl": "http://www.iletaitunsquare.com/",
+    "name": "Il Etait Un Square",
+    "userReviewCount": 4413
+  },
+  {
+    "averageRating": 5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/d5/ae/72/la-pizza-du-moment-avec.jpg?w=2900&h=2100&s=1",
+    "menuUrl": "https://dagiuseppe.fr/order/?type=pickup",
+    "name": "Da Giuseppe",
+    "userReviewCount": 960
+  },
+  {
+    "averageRating": 5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/54/54/fe/pizza-fiammeggiante.jpg?w=5400&h=3000&s=1",
+    "menuUrl": "N/A",
+    "name": "Pizzamore Paris",
+    "userReviewCount": 1486
+  }
+]

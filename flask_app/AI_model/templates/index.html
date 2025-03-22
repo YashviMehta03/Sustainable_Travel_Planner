@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Itinerary Planner</title>
+</head>
+<body>
+    <h1>Travel Itinerary Planner</h1>
+    <form action="/generate" method="post">
+        <label for="source">Source:</label>
+        <input type="text" id="source" name="source" required><br><br>
+
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" required><br><br>
+        
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+        
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+        
+        <label for="num_people">Number of People:</label>
+        <input type="number" id="num_people" name="num_people" required><br><br>
+        
+        <label for="budget">Budget:</label>
+        <input type="number" id="budget" name="budget" required><br><br>
+        
+        <label>Travel Mode:</label>
+        <input type="radio" id="couple" name="travel_mode" value="couple" required>
+        <label for="couple">Couple</label>
+        <input type="radio" id="friend" name="travel_mode" value="friend" required>
+        <label for="friend">Friend</label><br><br>
+        
+        <label for="preferences">Preferences:</label><br>
+        <textarea id="preferences" name="preferences" rows="4" cols="50"></textarea><br><br>
+        
+        <button type="submit">Generate Itinerary</button>
+    </form>
+
+    {% if itinerary %}
+        <h2>Generated Itinerary:</h2>
+        <pre>{{ itinerary }}</pre>
+    {% endif %}
+
+    {% if weather %}
+        <h2>Weather Forecast:</h2>
+        <table border="1">
+            <tr>
+                <th>Location</th>
+                <th>Condition</th>
+                <th>High Temp (°C)</th>
+                <th>Low Temp (°C)</th>
+            </tr>
+            {% for day in weather %}
+            <tr>
+                <td>{{ day.location }}</td>
+                <td>{{ day.condition }}</td>
+                <td>{{ day.high_temp }}</td>
+                <td>{{ day.low_temp }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if cities_visited %}
+        <h2>Cities Visited:</h2>
+        <ul>
+            {% for city in cities_visited %}
+                <li>{{ city }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

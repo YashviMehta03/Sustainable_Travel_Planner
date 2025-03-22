@@ -1,0 +1,37 @@
+[
+  {
+    "averageRating": 4.5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/5b/fe/6f/exterior.jpg?w=1000&h=400&s=1",
+    "menuUrl": "N/A",
+    "name": "The Glover Arms",
+    "userReviewCount": 1345
+  },
+  {
+    "averageRating": 4,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/6d/26/e4/20210724-130924-largejpg.jpg?w=1000&h=700&s=1",
+    "menuUrl": "http://www.harvester.co.uk/restaurants/scotlandandnorthernireland/thebroxdenmanorperth/ourmenus",
+    "name": "The Broxden Manor",
+    "userReviewCount": 774
+  },
+  {
+    "averageRating": 4.5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/de/47/60/team.jpg?w=1200&h=600&s=1",
+    "menuUrl": "https://www.everestinnscotland.co.uk/order?l=en",
+    "name": "Everest Inn",
+    "userReviewCount": 898
+  },
+  {
+    "averageRating": 4.5,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/28/cf/13/fine-dining-in-eolas.jpg?w=1000&h=500&s=1",
+    "menuUrl": "N/A",
+    "name": "Eòlas",
+    "userReviewCount": 20
+  },
+  {
+    "averageRating": 4,
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/24/28/cd/0e/enjoy-food-in-cairns.jpg?w=1000&h=500&s=1",
+    "menuUrl": "N/A",
+    "name": "Cairns",
+    "userReviewCount": 206
+  }
+]

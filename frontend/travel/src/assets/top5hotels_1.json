@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Hotel du Parc Montsouris",
+    "address": "Parc-de-Montsouris",
+    "rating": 3.5,
+    "priceRange": "$180",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/92/70/29/hotel-du-parc-montsouris.jpg?w={width}&h={height}&s=1"
+  },
+  {
+    "name": "1. Grand Hotel Du Palais Royal",
+    "address": "Louvre / Palais-Royal",
+    "rating": 5,
+    "priceRange": "$1,490",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/a1/71/7b/junior-suite-emily.jpg?w={width}&h={height}&s=1"
+  },
+  {
+    "name": "2. Hyatt Regency Paris Étoile",
+    "address": "Ternes",
+    "rating": 4,
+    "priceRange": "$904",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/6c/62/81/caption.jpg?w={width}&h={height}&s=1"
+  },
+  {
+    "name": "3. Hôtel Regina Louvre",
+    "address": "1st Arr. - Louvre",
+    "rating": 4.5,
+    "priceRange": "$1,615",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/87/89/41/caption.jpg?w={width}&h={height}&s=1"
+  },
+  {
+    "name": "4. Pullman Paris Montparnasse Hotel",
+    "address": "Plaisance",
+    "rating": 4.5,
+    "priceRange": "$602",
+    "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/61/74/8e/pullman-paris-montparnasse.jpg?w={width}&h={height}&s=1"
+  }
+]

@@ -1,0 +1,38 @@
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.moving-background {
+    background-image: url("\\assets\\world_input.jpg");
+    /* Replace with your image path */
+    background-size: cover;
+    /* Cover the entire area */
+    background-repeat: no-repeat;
+    /* Prevent repeating */
+    animation: moveBackground 30s linear infinite;
+    /* Adjust duration for speed */
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
