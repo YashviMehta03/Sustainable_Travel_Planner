@@ -101,6 +101,14 @@ git clone https://github.com/YashviMehta03/Sustainable_Travel_Planner.git
   nodemon server.js
 ```
 
+Create a .env file in this folder in the following format-
+```bash
+  PORT=2000
+  SECRET_ACCESS_TOKEN = <choose_a_name>
+  CONNECTION_STRING=<mongodb_connection_string>
+  NODE_ENV=development    
+```
+
 4.To start flask:
 ```bash
   cd flask_app/AI_model
