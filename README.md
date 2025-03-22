@@ -34,7 +34,7 @@ The platform integrates live weather updates and carbon footprint analysis to pr
 
 - [GitHub Repository](https://github.com/YashviMehta03/Sustainable_Travel_Planner)
 - [Demo Video](demo_video/travelplanner_demo_video.mp4)
-- [Drive Link to Screenshots of your project](https://drive.google.com/drive/folders/1tSXbyG9m7TrjCNUw4z-Ki04_n3MJqJAP)
+- [Drive Link to Screenshots of the project](https://drive.google.com/drive/folders/1tSXbyG9m7TrjCNUw4z-Ki04_n3MJqJAP)
 
 ## 🤖Tech-Stack
 
